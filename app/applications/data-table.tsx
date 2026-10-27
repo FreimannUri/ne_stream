@@ -37,17 +37,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-// 1. Конфигурация возможностей таблицы (создаётся один раз на уровне модуля)
-const features = tableFeatures({
-  rowSortingFeature,
-  columnFilteringFeature,
-  rowPaginationFeature,
-  columnVisibilityFeature,
-  rowSelectionFeature,
-  sortedRowModel: createSortedRowModel(),
-  filteredRowModel: createFilteredRowModel(),
-  paginatedRowModel: createPaginatedRowModel(),
-});
+import { features } from '@/lib/table-features';
 
 interface DataTableProps<TData extends RowData, TValue> {
   columns: ColumnDef<typeof features, TData>[];

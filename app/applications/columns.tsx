@@ -1,6 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
+import { features } from '@/lib/table-features';
 import { MoreHorizontal, ArrowUpDown, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,6 +16,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { redirect } from 'next/navigation';
 import { deleteApplication } from './actions';
 
+
 export type appSchema = {
   id: string;
   employer: string;
@@ -23,7 +25,7 @@ export type appSchema = {
   date: string;
 };
 
-export const columns: ColumnDef<appSchema>[] = [
+export const columns: ColumnDef<typeof features, appSchema>[] = [
   {
     id: 'select',
     header: ({ table }) => (

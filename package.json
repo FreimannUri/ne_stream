@@ -46,7 +46,6 @@
     "typescript": "7.0.2"
   },
   "allowScripts": {
-    "bcrypt@6.0.0": true,
     "sharp@0.34.5": true,
     "@parcel/watcher@2.6.0": true,
     "@swc/core@1.15.46": true
