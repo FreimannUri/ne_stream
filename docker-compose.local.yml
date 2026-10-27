@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: local-postgres
+    environment:
+      POSTGRES_USER: iurii
+      POSTGRES_PASSWORD: q
+      POSTGRES_DB: iurii
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata_local:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  pgdata_local:
