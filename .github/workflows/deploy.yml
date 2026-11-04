@@ -25,7 +25,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          # Теперь копируем и образ, и сам файл docker-compose.yml из репозитория!
+
           source: "app.tar,docker-compose.yml"
           target: "~/nextjs-app/"
 
@@ -39,16 +39,11 @@ jobs:
             set -e
             cd ~/nextjs-app
 
-            echo "=== 1. Создаём .env из секретов ==="
             cat > .env << 'ENV_EOF'
             ${{ secrets.ENV_FILE }}
             ENV_EOF
 
-            echo "=== 2. Загружаем свежий образ ==="
             docker load < app.tar
 
-            echo "=== 3. Перезапускаем (используя скопированный docker-compose.yml) ==="
             docker compose down --remove-orphans || true
             docker compose up -d --force-recreate
-
-            echo "✅ Деплой завершён!"
