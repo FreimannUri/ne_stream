@@ -1,14 +1,12 @@
 import "@/app/globals.css";
 import { inter } from "@/app/ui/fonts";
 import { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { Header } from "@/components/header";
+import { ThemeProvider } from "@/app/components/theme-provider";
+import { SidebarProvider, SidebarTrigger } from "@/app/ui/sidebar";
+import { AppSidebar } from "@/app/components/app-sidebar";
+import { Header } from "@/app/components/header";
 import { cookies } from "next/headers";
 import Template from "./ui/template";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   // title: {
@@ -41,11 +39,9 @@ export default async function RootLayout({
 }) {
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
-  const messages = await getMessages();
-  const locale = await getLocale();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -63,25 +59,23 @@ export default async function RootLayout({
       </head>
 
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SidebarProvider defaultOpen={defaultOpen}>
-              <AppSidebar />
-              {/* <Header /> */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SidebarProvider defaultOpen={defaultOpen}>
+            <AppSidebar />
+            {/* <Header /> */}
 
-              <main className="w-screen">
-                <SidebarTrigger className="m-4" />
+            <main className="w-screen">
+              <SidebarTrigger className="m-4" />
 
-                <Template>{children}</Template>
-              </main>
-            </SidebarProvider>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+              <Template>{children}</Template>
+            </main>
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

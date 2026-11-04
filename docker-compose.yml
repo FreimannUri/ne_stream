@@ -9,25 +9,20 @@ services:
       POSTGRES_USER: iurii
       POSTGRES_PASSWORD: q
       POSTGRES_DB: iurii
-    # --- ДОБАВЛЕНО ДЛЯ РАЗРАБОТКИ ---
-    # Пробрасываем порт наружу, чтобы локальный npm run dev из WSL видел базу по адресу 127.0.0.1:5432
-    ports:
-      - "5432:5432"
-    # --------------------------------
+
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   web:
-    # --- ИСПРАВЛЕНО ДЛЯ СБОРКИ ---
-    # Теперь docker compose up --build поймет, что нужно собрать локальный Dockerfile
     build:
       context: .
       dockerfile: Dockerfile
     image: app:latest
-    # --------------------------------
     restart: always
+
     ports:
-      - "3000:3000"
+      - "80:3000"
+
     networks:
       - default
     env_file:
