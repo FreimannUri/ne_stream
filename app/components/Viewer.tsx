@@ -64,8 +64,17 @@ export default function Viewer() {
         playsInline
         style={{ width: "100%", display: "block" }}
       />
-      <span style={{ position: "absolute", top: 8, left: 8, color: "#fff" }}>
+      <span className="absolute left-2 top-2 flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-0.5 text-xs text-white">
+        <span
+          className={`size-2 rounded-full ${
+            status === "live" ? "bg-green-500" : "bg-red-500"
+          }`}
+        />
         {status}
+      </span>
+
+      <span className="absolute bottom-2 left-2 rounded-md bg-black/70 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+        ESP32-S3 + OV5640 + Rust
       </span>
     </div>
   );
