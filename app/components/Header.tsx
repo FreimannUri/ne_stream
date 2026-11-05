@@ -1,11 +1,11 @@
-import { Languages, MessagesSquare, Table2 } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
+import { Home, Table2 } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const items = [
   {
     title: "Home",
     url: "/",
-    icon: Table2,
+    icon: Home,
   },
   {
     title: "Chart",
@@ -16,7 +16,7 @@ const items = [
 
 export function Header() {
   return (
-    <header className="flex h-16 bg-secondary">
+    <header className="flex h-16 items-center bg-secondary">
       {items.map((item, key) => (
         <a key={key} href={item.url} className="flex px-10">
           <item.icon />
@@ -25,15 +25,7 @@ export function Header() {
         </a>
       ))}
 
-      <a
-        href="https://freedns.afraid.org"
-        target="_blank"
-        className="text-primary hover:underline text-sm"
-      >
-        Free DNS
-      </a>
-
-      <ModeToggle />
+      <ThemeToggle />
     </header>
   );
 }

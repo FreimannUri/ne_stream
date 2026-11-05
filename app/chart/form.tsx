@@ -27,8 +27,7 @@ export type formSchema = {
   new: boolean;
 };
 
-export default function Application(application: appSchema) {
-  // console.log(application);
+export default function SharedForm(application: appSchema) {
   const now = new Date().toISOString().split("T")[0];
 
   const form = useForm<formSchema>({

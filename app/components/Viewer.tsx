@@ -56,25 +56,25 @@ export default function Viewer() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-7xl mt-16 mx-auto bg-black">
+    <div className="@container relative aspect-video w-full max-w-360 overflow-hidden rounded-xl bg-black">
       <video
         ref={video}
         autoPlay
         muted
         playsInline
-        style={{ width: "100%", display: "block" }}
+        className="block h-full w-full object-contain"
       />
-      <span className="absolute left-2 top-2 flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-0.5 text-xs text-white">
+
+      <span
+        className="absolute left-[2cqw] top-[2cqw] flex items-center gap-[1cqw] rounded-full bg-black/50
+                    px-[1.6cqw] py-[0.5cqw] text-[length:clamp(10px,2.4cqw,18px)] text-white"
+      >
         <span
-          className={`size-2 rounded-full ${
+          className={`size-[1.4cqw] min-h-1.5 min-w-1.5 rounded-full ${
             status === "live" ? "bg-green-500" : "bg-red-500"
           }`}
         />
         {status}
-      </span>
-
-      <span className="absolute bottom-2 left-2 rounded-md bg-black/70 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
-        ESP32-S3 + OV5640 + Rust
       </span>
     </div>
   );

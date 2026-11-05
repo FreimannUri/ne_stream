@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { pool } from '../../db';
-import { formSchema } from './application';
+import { formSchema } from './form';
 
 export async function query(values: formSchema) {
   // console.log(values);

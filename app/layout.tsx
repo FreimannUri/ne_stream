@@ -1,10 +1,8 @@
 import "@/app/globals.css";
 import { inter } from "@/app/ui/fonts";
 import { Metadata } from "next";
-import { ThemeProvider } from "@/app/components/theme-provider";
-import { SidebarProvider, SidebarTrigger } from "@/app/ui/sidebar";
-import { AppSidebar } from "@/app/components/app-sidebar";
-import { Header } from "@/app/components/header";
+import { ThemeProvider } from "@/app/components/ThemeProvider";
+import { Header } from "@/app/components/Header";
 import { cookies } from "next/headers";
 import Template from "./ui/template";
 
@@ -38,7 +36,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
+  // const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
 
   return (
     <html suppressHydrationWarning>
@@ -65,16 +63,11 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider defaultOpen={defaultOpen}>
-            <AppSidebar />
-            {/* <Header /> */}
+          <Header />
 
-            <main className="w-screen">
-              <SidebarTrigger className="m-4" />
-
-              <Template>{children}</Template>
-            </main>
-          </SidebarProvider>
+          <main className="w-screen">
+            <Template>{children}</Template>
+          </main>
         </ThemeProvider>
       </body>
     </html>

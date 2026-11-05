@@ -12,7 +12,7 @@ import {
 } from "@/app/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
 
-export function ModeToggle() {
+export function ThemeToggle() {
   const { setTheme } = useTheme();
   const [locale, setLocale] = useState("");
   const router = useRouter();
@@ -39,7 +39,7 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="flex w-full pl-2 justify-end">
+    <div className="flex w-full pl-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
