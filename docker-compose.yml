@@ -1,43 +1,15 @@
 services:
-  db:
-    image: postgres:15-alpine
-    container_name: shared-db-container
-    restart: always
-    networks:
-      - default
-    environment:
-      POSTGRES_USER: iurii
-      POSTGRES_PASSWORD: q
-      POSTGRES_DB: iurii
-
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
     image: app:latest
     restart: always
-
     ports:
       - "3000:3000"
-
     networks:
       - default
     env_file:
       - .env
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://iurii:q@db:5432/iurii
-    command: >
-      sh -c " sleep 5; PGPASSWORD=q psql -h db -U iurii -d postgres -tAc \"SELECT 1 FROM pg_database WHERE datname = 'directus'\" | grep -q 1 || PGPASSWORD=q psql -h db -U iurii -d postgres -c \"CREATE DATABASE directus;\"; PGPASSWORD=q psql -h db -U iurii -d iurii -c \"CREATE TABLE IF NOT EXISTS applications (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), employer TEXT, vacancy TEXT, state TEXT, date DATE);\"; node server.js "
 
 networks:
   default:
     external: true
     name: shared_net
-
-volumes:
-  pgdata:

@@ -17,13 +17,13 @@ const items = [
 export function Header() {
   return (
     <header className="flex h-16 items-center bg-secondary">
-      {items.map((item, key) => (
+      {/* {items.map((item, key) => (
         <a key={key} href={item.url} className="flex px-10">
           <item.icon />
 
           <span>{item.title}</span>
         </a>
-      ))}
+      ))} */}
 
       <ThemeToggle />
     </header>
