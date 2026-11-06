@@ -39,8 +39,9 @@ jobs:
             set -e
             cd ~/nextjs-app
 
-            cat > .env << 'ENV_EOF'
-            ${{ secrets.ENV_FILE }}
+            cat > .env << ENV_EOF
+            WHEP_URL=${{ secrets.WHEP_URL }}
+            STATS_URL=${{ secrets.STATS_URL }}
             ENV_EOF
 
             docker load < app.tar
