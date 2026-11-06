@@ -4,16 +4,17 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@wrksz/themes/client";
 import { Button } from "@/app/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/app/ui/dropdown-menu";
+import { Menu } from "@base-ui/react/menu";
 import { useRouter } from "next/navigation";
 
+const THEMES = [
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+  { value: "system", label: "System" },
+] as const;
+
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [locale, setLocale] = useState("");
   const router = useRouter();
 
@@ -40,33 +41,45 @@ export function ThemeToggle() {
 
   return (
     <div className="flex w-full pl-2">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon">
-            <Sun
-              className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100
-          transition-all dark:-rotate-90 dark:scale-0"
-            />
-            <Moon
-              className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0
-          transition-all dark:rotate-0 dark:scale-100"
-            />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-        </DropdownMenuTrigger>
+      <Menu.Root>
+        <Menu.Trigger
+          render={
+            <Button variant="outline" size="icon">
+              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          }
+        />
 
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => setTheme("light")}>
-            Light
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setTheme("dark")}>
-            Dark
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setTheme("system")}>
-            System
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        <Menu.Portal>
+          <Menu.Positioner align="end" sideOffset={8} className="z-50">
+            <Menu.Popup
+              className="min-w-[8rem] overflow-hidden rounded-md border border-neutral-200
+                         bg-white p-1 text-neutral-900 shadow-md
+                         dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
+            >
+              <Menu.RadioGroup
+                value={theme ?? "system"}
+                onValueChange={(value) => setTheme(value)}
+              >
+                {THEMES.map(({ value, label }) => (
+                  <Menu.RadioItem
+                    key={value}
+                    value={value}
+                    className="flex cursor-default select-none items-center rounded-sm
+                               px-2 py-1.5 text-sm outline-none
+                               data-[highlighted]:bg-neutral-100
+                               dark:data-[highlighted]:bg-neutral-800"
+                  >
+                    {label}
+                  </Menu.RadioItem>
+                ))}
+              </Menu.RadioGroup>
+            </Menu.Popup>
+          </Menu.Positioner>
+        </Menu.Portal>
+      </Menu.Root>
     </div>
   );
 }
