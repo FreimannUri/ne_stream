@@ -4,11 +4,13 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Viewer from "@/app/components/Viewer";
+import Stats from "./components/Stats";
 
 export default async function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex ">
       <Viewer />
+      <Stats />
 
       {/* <About /> */}
       {/* <Hero /> */}
