@@ -56,7 +56,7 @@ export default function Viewer() {
   }, []);
 
   return (
-    <div className="@container relative aspect-video w-full max-w-320 overflow-hidden rounded-xl bg-black">
+    <div className="@container relative aspect-video w-full max-w-300 overflow-hidden rounded-xl bg-black">
       <video
         ref={video}
         autoPlay
