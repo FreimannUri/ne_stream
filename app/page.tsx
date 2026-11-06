@@ -8,7 +8,7 @@ import Stats from "./components/Stats";
 
 export default async function Home() {
   return (
-    <main className="flex ">
+    <main className="flex flex-col">
       <Viewer />
       <Stats />
 

@@ -162,6 +162,7 @@ export default function Stats() {
           );
         })}
       </div>
+
       <p className="mt-1 text-xs text-muted-foreground">
         Uptime {Math.floor(last.esp.up / 60)} min · bad frames {last.esp.inv} ·
         capture errors {last.esp.err}
